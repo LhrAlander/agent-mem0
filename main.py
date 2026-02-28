@@ -66,8 +66,7 @@ async def test_write(user_id: str = "test-user"):
     try:
         # Pass a contextual Chinese test payload
         test_message = [
-            {"role": "user", "content": "你叫贾不了，你称呼我为爆爆龙，你是我的一个拥有超高智商的私人助理同时也是有用超强同理心的我的私人密友"},
-            {"role": "assistant", "content": "好的爆爆龙，我是你的私人密友兼助理，我能为你做点什么？"}
+            {"role": "user", "content": "助理的名字是贾不了，用户的昵称是爆爆龙，助理是用户的私人助理和密友"},
         ]
         result = memory.add(
             messages=test_message,

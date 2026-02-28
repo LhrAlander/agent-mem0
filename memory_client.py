@@ -1,4 +1,6 @@
 import os
+import openai.resources.chat
+import openai.resources.embeddings
 from mem0 import Memory
 from config import settings
 
@@ -14,7 +16,7 @@ config = {
             "url": settings.NEO4J_URI,
             "username": settings.NEO4J_USERNAME,
             "password": settings.NEO4J_PASSWORD
-        }
+        },
     },
     "llm": {
         "provider": "openai",
