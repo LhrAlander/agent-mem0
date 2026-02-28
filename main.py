@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 import uvicorn
+import traceback
 from config import settings
 from memory_client import memory
 
@@ -55,7 +56,10 @@ async def search_related(payload: QueryRequest):
          )
          return {"status": "success", "results": results}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"\n[ERROR] /api/messages/related failed.")
+        print(f"[PAYLOAD] query: '{payload.query}', user_id: {payload.user_id}, agent_id: {payload.agent_id}")
+        print(f"[TRACEBACK] \n{traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=f"Search related failed: {str(e)}\nMake sure all required Mem0 models (LLM/embedding) are configured and Qdrant/Neo4j can be reached.")
 
 @app.get("/api/test-write", summary="Quickly test the write functionality")
 async def test_write(user_id: str = "test-user"):
